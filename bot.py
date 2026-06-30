@@ -18,7 +18,9 @@ import sqlite3
 # CONFIGURATION
 # =========================
 
-TOKEN = "8806547072:AAHW2OdKGjEZuEccY2wrHGy3IFee7Q9Igjw"
+import os
+
+TOKEN = os.getenv("8946972049:AAEUO0So4Ljzr1-i8uJwVJFrB0oyvud58t4")
 ADMIN_ID = 6259009798
 
 NAME, COUNTRY, DOB, PHRASE_ID, EMAIL, DOCUMENT, CONFIRM = range(7)

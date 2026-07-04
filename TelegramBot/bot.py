@@ -20,8 +20,7 @@ import sqlite3
 
 import os
 
-TOKEN = os.getenv("8946972049:AAHLP3d8LB3dei8llVgZhOSfjdz52Bv_4Ks")
-print(f"TOKEN = {repr(TOKEN)}")
+TOKEN = os.getenv("8946972049:AAFc7CH3kxdj0EFbCYonFnEdbyMWT80TUxY")
 
 if not TOKEN:
     raise Exception("TELEGRAM_TOKEN environment variable is missing!")

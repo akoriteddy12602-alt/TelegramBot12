@@ -21,6 +21,8 @@ import sqlite3
 import os
 
 TOKEN = os.getenv("8946972049:AAHLP3d8LB3dei8llVgZhOSfjdz52Bv_4Ks")
+print("TOKEN:", TOKEN)
+
 ADMIN_ID = 6259009798
 
 NAME, COUNTRY, DOB, PHRASE_ID, EMAIL, DOCUMENT, CONFIRM = range(7)

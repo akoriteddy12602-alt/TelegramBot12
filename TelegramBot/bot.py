@@ -20,7 +20,7 @@ import sqlite3
 
 import os
 
-TOKEN = os.getenv("8946972049:AAFc7CH3kxdj0EFbCYonFnEdbyMWT80TUxY")
+TOKEN = os.getenv("TELEGRAM_TOKEN")
 
 if not TOKEN:
     raise Exception("TELEGRAM_TOKEN environment variable is missing!")

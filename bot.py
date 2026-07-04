@@ -21,7 +21,10 @@ import sqlite3
 import os
 
 TOKEN = os.getenv("8946972049:AAHLP3d8LB3dei8llVgZhOSfjdz52Bv_4Ks")
-print("TOKEN:", TOKEN)
+print(f"TOKEN = {repr(TOKEN)}")
+
+if not TOKEN:
+    raise Exception("TELEGRAM_TOKEN environment variable is missing!")
 
 ADMIN_ID = 6259009798
 

